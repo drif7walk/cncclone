@@ -1,0 +1,4 @@
+# Config file for game
+WindowWidth=320
+WindowHeight=200
+foo=0001
