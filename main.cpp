@@ -11,7 +11,7 @@ void ParseConfig()
 {
 	/* open config then parse config */
 	string s;
-	ifstream conffile("config");
+	ifstream conffile("cfg.silly");
 
 	if (conffile.is_open()) // File exists
 	{
@@ -29,11 +29,11 @@ void ParseConfig()
 			if (i >= s.length()) continue;
 			
 			/* XXX */
-			if      (s.substr(0, i).compare("WindowWidth"))
+			if      (!s.substr(0, i).compare("WindowWidth"))
 			{	SCRW = atoi((char*)s.substr(i+1,s.length()).c_str());}
-			else if (s.substr(0, i).compare("WindowHeight"))
+			else if (!s.substr(0, i).compare("WindowHeight"))
 			{	SCRH = atoi((char*)s.substr(i+1,s.length()).c_str());}
-			else if (s.substr(0, i).compare("foo"))
+			else if (!s.substr(0, i).compare("foo"))
 			{	foo = atoi((char*)s.substr(i+1,s.length()).c_str());}
 			/* etc.  */
 
