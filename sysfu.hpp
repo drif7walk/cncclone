@@ -2,13 +2,11 @@
 #define SYSFU_HPP
 
 #include <string.h>
+
+#include "errorMsg.hpp"
+
 using namespace std;
 
-/* globals */
-SDL_Window* window = NULL;
-SDL_Surface* screenSurface = NULL;
-
-void ERRLOG(string errmsg);
 
 void ParseConfig()
 {
@@ -64,22 +62,6 @@ void ParseConfig()
 
 }
 
-void ERRLOG(string errmsg)
-{
-	/*
-	X-style prefix
-	(II) - Information
-	(EE) - Error
-	(WW) - Warning
-	*/
-	ofstream conffile("error.log");
-		
-	if (conffile.is_open())
-	{
-		conffile << (char*)errmsg.c_str();
-	}
 
-	conffile.close();
-}
 
 #endif

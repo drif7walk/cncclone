@@ -3,8 +3,8 @@
 
 #include <SDL.h>
 #include "sysfu.hpp"
+#include "errorMsg.hpp"
 
-SDL_Renderer* renderer;
 
 //SDL_Texture* CheckerPattern(int w, int h)
 //{
