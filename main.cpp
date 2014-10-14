@@ -19,6 +19,12 @@ int main(int argc, char** argv)
 	/* Remove error log */
 	remove("error.log");
 
+	/* Initialize SDL */
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+		ERRLOG("(EE) SDL_INIT");
+		return 1;
+	}
+
 	/* Create window using sysfu.h */
 	MakeWindow();
 
@@ -31,12 +37,6 @@ int main(int argc, char** argv)
 	SDL_Event e;
 
 	ParseConfig();
-
-	/* Initialize SDL */
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		ERRLOG("(EE) SDL_INIT");
-		return 1;
-	}
 
 	/* XXX */
 	double _fps = 1000/fps;
