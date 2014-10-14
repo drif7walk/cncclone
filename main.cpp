@@ -1,3 +1,7 @@
+/*
+TODO: Competend handling of resources!!!
+*/
+
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <fstream>
@@ -6,6 +10,8 @@
 #include "prefs.h"
 #include "imagefu.hpp"
 #include "sysfu.hpp"
+#include "clonerenderer.hpp"
+
 using namespace std;
 
 int main(int argc, char** argv)
@@ -13,30 +19,32 @@ int main(int argc, char** argv)
 	/* Remove error log */
 	remove("error.log");
 
+	/* Create window using sysfu.h */
+	MakeWindow();
+
+	/* Set up renderer */
+	CloneRenderer* ren = new CloneRenderer();
+	
+	/* End renderer setup */
+
 	bool quit = false;
 	SDL_Event e;
 
 	ParseConfig();
 
+	/* Initialize SDL */
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		ERRLOG("(EE) SDL_INIT");
 		return 1;
 	}
 
-	window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRW, SCRH, SDL_WINDOW_SHOWN);
+	/* XXX */
+	double _fps = 1000/fps;
 
-	if (window == nullptr) {
-		ERRLOG("(EE) Create window.");
-		SDL_Quit();
-		return 1;
-	}
+	/* testbed for demos */
+	SDL_Texture* tex = loadbmp("assets/guy.bmp", ren->renderer);
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr) {
-		ERRLOG("(EE) Unable to create renderer.");
-		SDL_Quit();
-		return 1;
-	}
+	/* end testbed for demos */
 
 	/* Program loop */
 	while (!quit)
@@ -47,16 +55,29 @@ int main(int argc, char** argv)
 			switch (e.type)
 			{
 				case SDL_QUIT:
-					quit = true; break;
+					quit = true;
 				default: continue;
 			}
 		}
 
-		//SDL_RenderClear(renderer); //xxx
-		//renderTexture(buffer, renderer, x, y); //xxx
-		//SSSDL_RenderPresent(renderer); //xxx
+		/* Rudimentary drawing */
+		ren->Clear();
+
+			/* demo */
+			//renderTexture(buffer, renderer, x, y); //xxx
+			ren->Render(tex, 10, 10);
+			/* end demo */
+		ren->Present();
 		
+		/* XXX */
+		SDL_Delay(_fps);
 	}
+
+	SDL_DestroyTexture(tex);
+
+	SDL_DestroyWindow(window);
+	delete ren;
+
 
 	SDL_Quit();
 	return 0;

@@ -1,14 +1,30 @@
+/*
+sysfu.hpp
+
+Contains functions, methods and variables that control the container of the game, such as the window.
+
+*/
+
 #ifndef SYSFU_HPP
 #define SYSFU_HPP
 
 #include <string.h>
 using namespace std;
 
-/* globals */
+/* Globals */
 SDL_Window* window = NULL;
 SDL_Surface* screenSurface = NULL;
 
 void ERRLOG(string errmsg);
+
+void MakeWindow()
+{
+	window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRW, SCRH, SDL_WINDOW_SHOWN);
+	if (window == nullptr) {
+		ERRLOG("(EE) Create window.");
+		SDL_Quit();
+	}
+}
 
 void ParseConfig()
 {
@@ -35,6 +51,8 @@ void ParseConfig()
 			{	SCRW = atoi((char*)s.substr(i+1,s.length()).c_str());}
 			else if (!s.substr(0, i).compare("WindowHeight"))
 			{	SCRH = atoi((char*)s.substr(i+1,s.length()).c_str());}
+			else if (!s.substr(0, i).compare("FPS"))
+			{	fps = atoi((char*)s.substr(i+1,s.length()).c_str());}
 			/* etc.  */
 
 			
@@ -67,16 +85,19 @@ void ParseConfig()
 void ERRLOG(string errmsg)
 {
 	/*
-	X-style prefix
-	(II) - Information
-	(EE) - Error
-	(WW) - Warning
+	I - Information
+	E - Error
+	W - Warning
 	*/
-	ofstream conffile("error.log");
+	ofstream conffile("error.log", ios::out | ios::app);
 		
 	if (conffile.is_open())
 	{
 		conffile << (char*)errmsg.c_str();
+		if (errmsg[0] == 'E')
+			conffile << " : " << SDL_GetError();
+
+		conffile << endl;
 	}
 
 	conffile.close();
