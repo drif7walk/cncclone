@@ -1,4 +1,3 @@
-# Config file for game
-WindowWidth=320
-WindowHeight=200
-foo=0001
+# Default configuration file
+WindowWidth=800
+WindowHeight=600

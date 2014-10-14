@@ -2,11 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
+#include "prefs.h"
 using namespace std;
 
-int SCRW = 800;
-int SCRH = 600;
-int foo = 1337;
 void ParseConfig()
 {
 	/* open config then parse config */
@@ -27,14 +26,11 @@ void ParseConfig()
 				if (s[i] == '=') break;
 			}
 			if (i >= s.length()) continue;
-			
-			/* XXX */
+
 			if      (!s.substr(0, i).compare("WindowWidth"))
 			{	SCRW = atoi((char*)s.substr(i+1,s.length()).c_str());}
 			else if (!s.substr(0, i).compare("WindowHeight"))
 			{	SCRH = atoi((char*)s.substr(i+1,s.length()).c_str());}
-			else if (!s.substr(0, i).compare("foo"))
-			{	foo = atoi((char*)s.substr(i+1,s.length()).c_str());}
 			/* etc.  */
 
 			
@@ -43,9 +39,22 @@ void ParseConfig()
 
 		conffile.close();
 	}
-	else // File does not exist :(
+	else // File does not exist
 	{
+		ofstream conffile("cfg.silly");
+		
+		if (conffile.is_open())
+		{
+			conffile << "# Default configuration file" << endl;
+			conffile << "WindowWidth=800" << endl;
+			conffile << "WindowHeight=600" << endl;
+		}
 
+		conffile.close();
+
+		
+		ParseConfig();
+		//*/
 	}
 
 }
@@ -59,7 +68,7 @@ int main(int argc, char** argv)
 
 	SDL_Init(SDL_INIT_VIDEO);
 
-	window = SDL_CreateWindow("yep. it iTwerks", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRW, SCRH, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCRW, SCRH, SDL_WINDOW_SHOWN);
 
 	SDL_Delay(1000);
 
