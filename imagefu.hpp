@@ -4,6 +4,13 @@
 #include <SDL2/SDL.h>
 #include "sysfu.hpp"
 
+SDL_Renderer* renderer;
+
+SDL_Texture* CheckerPattern(int w, int h)
+{
+	/* TODO: Generate checker pattern for testing purposes.*/
+}
+
 SDL_Texture* loadbmp(char* filename, SDL_Renderer* ren)
 {
 	SDL_Texture* texture = nullptr;
@@ -16,9 +23,23 @@ SDL_Texture* loadbmp(char* filename, SDL_Renderer* ren)
 
 		if (texture == nullptr)
 		{
-			ERRLOG("(EE) Unable to load image.");
+			ERRLOG("(EE) Unable to convert texture.");
 		}
 	}
+	else
+		ERRLOG("(EE) Unable to load image.");
+
+	return texture;
+}
+
+void renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y)
+{
+	SDL_Rect dst;
+	dst.x = x;
+	dst.y = y;	
+
+	SDL_QueryTexture(tex, NULL, NULL, &dst.w, &dst.h);
+	SDL_RenderCopy(ren, tex, NULL, &dst);
 }
 
 #endif

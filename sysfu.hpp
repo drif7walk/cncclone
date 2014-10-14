@@ -4,6 +4,10 @@
 #include <string.h>
 using namespace std;
 
+/* globals */
+SDL_Window* window = NULL;
+SDL_Surface* screenSurface = NULL;
+
 void ERRLOG(string errmsg);
 
 void ParseConfig()
