@@ -1,15 +1,15 @@
 #ifndef IMAGEFU_HPP
 #define IMAGEFU_HPP
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "sysfu.hpp"
 
 SDL_Renderer* renderer;
 
-SDL_Texture* CheckerPattern(int w, int h)
-{
-	/* TODO: Generate checker pattern for testing purposes.*/
-}
+//SDL_Texture* CheckerPattern(int w, int h)
+//{
+//	/* TODO: Generate checker pattern for testing purposes.*/
+//}
 
 SDL_Texture* loadbmp(char* filename, SDL_Renderer* ren)
 {
