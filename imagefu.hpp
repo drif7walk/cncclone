@@ -7,6 +7,8 @@
 SDL_Texture* CheckerPattern(int w, int h)
 {
 	/* TODO: Generate checker pattern for testing purposes.*/
+	SDL_Texture* texture = nullptr;
+	return texture;
 }
 
 SDL_Texture* loadbmp(const string &filename, SDL_Renderer* ren)
