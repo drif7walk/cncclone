@@ -39,7 +39,10 @@ int main(int argc, char** argv)
 	ParseConfig();
 
 	/* XXX */
-	double _fps = 1000 / fps; //fps for me is 50, fraps said so. should be 60
+	double _fps = 1000 / fps; /* fps for me is 50, fraps said so.									*/
+							  /* not really needed since vSync										*/
+							  /* we will have to make everything time dependant anyway since rts	*/
+						 	  /* fps will only matter if it is not optimized						*/
 
 	/* testbed for demos */
 	SDL_Texture* tex = loadbmp("assets/guy.bmp", ren->renderer);
@@ -61,6 +64,7 @@ int main(int argc, char** argv)
 		}
 
 		/* Rudimentary drawing */
+
 		ren->Clear();
 
 		/* demo */
@@ -76,6 +80,7 @@ int main(int argc, char** argv)
 	SDL_DestroyTexture(tex);
 
 	SDL_DestroyWindow(window);
+
 	delete ren;
 
 
