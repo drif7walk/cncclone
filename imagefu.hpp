@@ -18,8 +18,8 @@ SDL_Texture* loadbmp(const string &filename, SDL_Renderer* ren)
 
 	if (loadedimg != nullptr)
 	{
+		SDL_SetColorKey(loadedimg, 1, 0xff00ff);
 		texture = SDL_CreateTextureFromSurface(ren, loadedimg);
-
 		SDL_FreeSurface(loadedimg);
 
 		if (texture == nullptr)

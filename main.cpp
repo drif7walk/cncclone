@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 	ParseConfig();
 
 	/* XXX */
-	double _fps = 1000 / fps;
+	double _fps = 1000 / fps; //fps for me is 50, fraps said so. should be 60
 
 	/* testbed for demos */
 	SDL_Texture* tex = loadbmp("assets/guy.bmp", ren->renderer);
