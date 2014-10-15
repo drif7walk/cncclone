@@ -19,12 +19,18 @@ int main(int argc, char** argv)
 	/* Remove error log */
 	remove("error.log");
 
+	/* Initialize SDL */
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+		ERRLOG("(EE) SDL_INIT");
+		return 1;
+	}
+
 	/* Create window using sysfu.h */
 	MakeWindow();
 
 	/* Set up renderer */
 	CloneRenderer* ren = new CloneRenderer();
-	
+
 	/* End renderer setup */
 
 	bool quit = false;
@@ -32,14 +38,8 @@ int main(int argc, char** argv)
 
 	ParseConfig();
 
-	/* Initialize SDL */
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		ERRLOG("(EE) SDL_INIT");
-		return 1;
-	}
-
 	/* XXX */
-	double _fps = 1000/fps;
+	double _fps = 1000 / fps;
 
 	/* testbed for demos */
 	SDL_Texture* tex = loadbmp("assets/guy.bmp", ren->renderer);
@@ -50,25 +50,25 @@ int main(int argc, char** argv)
 	while (!quit)
 	{
 		/* Handle all events each iteration */
-		while (SDL_PollEvent(&e)) 
+		while (SDL_PollEvent(&e))
 		{
 			switch (e.type)
 			{
-				case SDL_QUIT:
-					quit = true;
-				default: continue;
+			case SDL_QUIT:
+				quit = true;
+			default: continue;
 			}
 		}
 
 		/* Rudimentary drawing */
 		ren->Clear();
 
-			/* demo */
-			//renderTexture(buffer, renderer, x, y); //xxx
-			ren->Render(tex, 10, 10);
-			/* end demo */
+		/* demo */
+		//renderTexture(buffer, renderer, x, y); //xxx
+		ren->Render(tex, 10, 10);
+		/* end demo */
 		ren->Present();
-		
+
 		/* XXX */
 		SDL_Delay(_fps);
 	}
