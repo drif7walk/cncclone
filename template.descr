@@ -1,0 +1,12 @@
+# Directions are always:
+# down
+# right
+# up
+# left
+
+OBJ=template
+FILE=template_doing.bmp
+TAG=template
+
+ROWS=t
+COLS=j

@@ -11,11 +11,16 @@ TODO: Competend handling of resources!!!
 #include "imagefu.hpp"
 #include "sysfu.hpp"
 #include "clonerenderer.hpp"
+#include "loader.hpp"
+
+#include "Vec2.hpp"
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
+	/* XXX magic sorcery does not work fix this later, lock texture perhaps? idk*/
+
 	/* Remove error log */
 	remove("error.log");
 
@@ -40,12 +45,13 @@ int main(int argc, char** argv)
 
 	/* XXX */
 	double _fps = 1000 / fps; /* fps for me is 50, fraps said so.									*/
-							  /* not really needed since vSync										*/
-							  /* we will have to make everything time dependant anyway since rts	*/
-						 	  /* fps will only matter if it is not optimized						*/
+	/* not really needed since vSync								
+        /* we will have to make everything time dependant anyway since rts	*/
+	/* fps will only matter if it is not optimized						*/
 
 	/* testbed for demos */
-	SDL_Texture* tex = loadbmp("assets/guy.bmp", ren->renderer);
+	//SDL_Texture* tex = loadbmp("assets/guy.bmp", ren->renderer);
+	SDL_Texture* tex = CheckerPatternTexture(ren->renderer, 30, 30);
 
 	/* end testbed for demos */
 

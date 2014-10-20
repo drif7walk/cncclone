@@ -1,0 +1,12 @@
+# Directions are always:
+# down
+# right
+# up
+# left
+
+OBJ=guy
+FILE=guy_walk.bmp
+TAG=walk
+
+ROWS=4
+COLS=3

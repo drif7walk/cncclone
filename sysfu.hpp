@@ -1,8 +1,7 @@
 /*
 sysfu.hpp
 
-Contains functions, methods and variables that control the container of the game, such as the window.
-
+Interacts with the operating system.
 */
 
 #ifndef SYSFU_HPP

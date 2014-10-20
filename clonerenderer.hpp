@@ -1,3 +1,8 @@
+/* 
+Deals with rendering.
+Anything that has anything to do with the screen ought to bottleneck through here.
+*/
+
 #ifndef CLONERENDERER_H
 #define CLONERENDERER_H
 

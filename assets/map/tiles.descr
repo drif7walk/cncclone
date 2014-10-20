@@ -1,0 +1,12 @@
+# Directions are always:
+# down
+# right
+# up
+# left
+
+OBJ=tiles
+FILE=tiles.bmp
+TAG=maptiles
+
+ROWS=8
+COLS=8
